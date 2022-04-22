@@ -13,7 +13,7 @@ _axios.interceptors.request.use(
         return config;
     },
     function (error) {
-        return Promise.reject(error);
+        console.log(error, 'error');
     }
 );
 
@@ -24,7 +24,6 @@ _axios.interceptors.response.use(
     },
     function (error) {
         console.log(error, 'error');
-        return Promise.reject(error);
     }
 );
 

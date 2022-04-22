@@ -1,11 +1,12 @@
 import { Calendar, Settings, Users } from 'react-feather';
 import LazyLoad from 'react-lazyload';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '../Button';
 import Text from '../Text';
 
 export default function CardCar({ item }) {
-    const year = item.time.substring(0, 4);
+    const { selectCar } = useSelector((state) => state.btn);
 
     return (
         <div className="rounded-lg p-6 shadow-md">
@@ -35,11 +36,11 @@ export default function CardCar({ item }) {
                 </div>
                 <div className="flex gap-2">
                     <Calendar color="#8A8A8A" size={20} />
-                    <Text>Tahun {year}</Text>
+                    <Text>Tahun {item.time}</Text>
                 </div>
             </div>
             <Link to={`${item.id}`}>
-                <Button title="Pilih Mobil" type="secondary" width="full" />
+                <Button title={selectCar} type="secondary" width="full" />
             </Link>
         </div>
     );

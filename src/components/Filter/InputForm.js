@@ -1,30 +1,14 @@
-import { useEffect } from 'react';
-import { Calendar, ChevronDown, Clock, Users } from 'react-feather';
-import { useDispatch } from 'react-redux';
-import { getCars } from '../../store/actions/carActions';
+import { Calendar, ChevronDown, Truck, Users } from 'react-feather';
+import { useSelector } from 'react-redux';
 import Button from '../Button';
 import InputField from './InputField';
 
-const listData = {
-    with_driver: [
-        { name: 'with_driver', placeholder: 'Dengan Driver', value: true },
-        { name: 'with_driver', placeholder: 'Tanpa Driver', value: false },
-    ],
-    start_rent_time: [
-        { name: 'start_rent_time', placeholder: '10:00', value: '10.00' },
-        { name: 'start_rent_time', placeholder: '11.00', value: '11.00' },
-        { name: 'start_rent_time', placeholder: '12.00', value: '12.00' },
-        { name: 'start_rent_time', placeholder: '13.00', value: '13.00' },
-    ],
-    type: [],
-};
-
 export default function InputForm({ loc, id, formValues, setFormValues, handleSubmit }) {
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getCars());
-    }, []);
+    const { listOption } = useSelector((state) => state.car);
+    const listData = {
+        with_driver: listOption.with_driver,
+        type: listOption.car_type,
+    };
 
     return (
         <div className="flex flex-col items-end justify-between gap-4 lg:flex-row">
@@ -55,12 +39,12 @@ export default function InputForm({ loc, id, formValues, setFormValues, handleSu
             />
             <InputField
                 type="select"
-                label="Waktu Jemput/Ambil"
-                listData={listData.start_rent_time}
-                value={formValues.start_rent_time}
-                onChange={(e) => setFormValues({ ...formValues, start_rent_time: e })}
-                placeholder={formValues.start_rent_time || 'Pilih Waktu'}
-                icon={<Clock size={18} />}
+                label="Tipe Mobil"
+                listData={listData.type}
+                value={formValues.type}
+                onChange={(e) => setFormValues({ ...formValues, type: e })}
+                placeholder={formValues.type || 'Pilih Tipe Mobil'}
+                icon={<Truck size={18} />}
             />
             <InputField
                 name="capacity"

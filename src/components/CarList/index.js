@@ -1,34 +1,28 @@
-import { useEffect } from 'react';
 import LazyLoad from 'react-lazyload';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
-import { getCars } from '../../store/actions/carActions';
+import { useSelector } from 'react-redux';
 import Loader from '../Loader';
+import Text from '../Text';
 import CardCar from './CardCar';
 
 export default function CarList() {
-    const loc = useLocation();
-    const dispatch = useDispatch();
     const { cars, isLoading } = useSelector((state) => state.car);
-
-    useEffect(() => {
-        dispatch(getCars(loc.state));
-    }, [dispatch, loc.state]);
 
     return (
         <>
             {isLoading && <Loader />}
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {cars ? (
-                    cars.map((car) => (
+            {cars.length > 0 ? (
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    {cars.map((car) => (
                         <LazyLoad key={car.id}>
                             <CardCar item={car} />
                         </LazyLoad>
-                    ))
-                ) : (
-                    <div>Empty List</div>
-                )}
-            </div>
+                    ))}
+                </div>
+            ) : (
+                <div className="flex items-center">
+                    <Text type="bold">Empty List</Text>
+                </div>
+            )}
         </>
     );
 }

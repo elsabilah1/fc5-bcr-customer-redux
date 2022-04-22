@@ -1,4 +1,5 @@
 import { Calendar, Settings, Users } from 'react-feather';
+import LazyLoad from 'react-lazyload';
 import { Link } from 'react-router-dom';
 import Button from '../Button';
 import Text from '../Text';
@@ -8,10 +9,12 @@ export default function CardCar({ item }) {
 
     return (
         <div className="rounded-lg p-6 shadow-md">
-            <div
-                className="mb-4 flex h-40 justify-center rounded-md bg-cover bg-center"
-                style={{ backgroundImage: `url(${item.image})` }}
-            />
+            <LazyLoad>
+                <div
+                    className="mb-4 flex h-40 justify-center rounded-md bg-cover bg-center"
+                    style={{ backgroundImage: `url(${item.image})` }}
+                />
+            </LazyLoad>
             <div className="mb-4 space-y-2">
                 <Text type="normal">
                     {item.name}/{item.with_driver ? 'Dengan Supir' : 'Tanpa Supir'}

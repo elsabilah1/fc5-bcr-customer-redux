@@ -18,7 +18,7 @@ export default function InputField({
     const loc = useLocation();
 
     const baseClass = classNames(
-        'w-full rounded-sm border border-gray-200 px-3 py-2 text-left text-gray-500 text-sm font-light placeholder:text-sm placeholder:font-light',
+        'w-full rounded-sm border border-gray-200 px-3 py-2 text-left text-gray-500 text-sm font-light active:bg-white placeholder:text-sm placeholder:font-light',
         loc.pathname.includes('cars') && 'disabled:bg-gray-200 disabled:text-gray-500',
         loc.pathname.includes('order') &&
             'disabled:bg-white disabled:p-0 disabled:border-none disabled:text-gray-500'
@@ -114,7 +114,7 @@ function Input({ value, onChange, className, type, name, placeholder, icon, ...p
         <div className="relative">
             <input
                 disabled={id && true}
-                className={`${className} after:bg-white`}
+                className={className}
                 type={type}
                 name={name}
                 value={value}

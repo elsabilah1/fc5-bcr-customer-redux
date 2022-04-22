@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
-import { getCarById } from '../../store/actions/carActions';
+import { getCarById, getCars } from '../../store/actions/carActions';
 import Filter from '../Filter';
 import Footer from './Footer';
 import Header from './Header';
@@ -17,9 +17,7 @@ export default function Layout() {
     const [filterFocus, setFilterFocus] = useState(false);
 
     useEffect(() => {
-        if (id) {
-            dispatch(getCarById(id));
-        }
+        dispatch(id ? getCarById(id) : getCars(loc.state));
     });
 
     return (

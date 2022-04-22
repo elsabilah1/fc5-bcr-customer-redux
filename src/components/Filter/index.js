@@ -7,7 +7,7 @@ import InputForm from './InputForm';
 const initialState = {
     with_driver: '',
     rent_at: new Date().toJSON().slice(0, 10),
-    start_rent_time: '',
+    type: '',
     capacity: '',
 };
 
@@ -24,6 +24,7 @@ export default function Filter({ setFilterFocus }) {
                 setFormValues({
                     with_driver: car.with_driver,
                     capacity: car.capacity,
+                    type: car.type,
                 });
             }
         }
